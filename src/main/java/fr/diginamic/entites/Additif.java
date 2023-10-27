@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -26,11 +28,15 @@ public class Additif {
 	private int id;
 	
 	/** le nom de l'additif*/
-	@Column(name = "NOM", length = 50, nullable = false, unique = true)
+	@Column(name = "NOM", length = 100, nullable = false, unique = true)
 	private String nom;
 	
 	/** la liste des produits */
-	@ManyToMany(mappedBy = "additifs")
+	@ManyToMany
+	@JoinTable(name = "ADDITIF_PRODUIT",
+		joinColumns = @JoinColumn(name = "ID_ADDITIF", referencedColumnName = "ID"),
+		inverseJoinColumns = @JoinColumn(name = "ID_PRODUIT", referencedColumnName = "ID")
+	)
 	private Set<Produit> produits;
 	
 	/** Constructeur pour JPA */

@@ -16,25 +16,32 @@ public class CategorieDAO {
 	
 	/**
 	 * Permet d'ajouter une nouvelle catégorie dans la base à partir de son nom
+	 * @param em : l'entityManager
 	 * @param nom : le nom de la catégorie
+	 * @return la catégorie qui vient d'être créée
 	 */
-	public static void insert(EntityManager em, String nom) {
+	public static Categorie insert(EntityManager em, String nom) {
 		Categorie cat = new Categorie();
 		cat.setNom(nom);
 		em.persist(cat);
+		cat = getByNom(em, nom);
+		return cat;
 	}
 	
-	/** 
-	 * Permet de récupérer une catégorie donnée existe déjà dans la base
-	 * @return true si la catégorie existe déja, false sinon
+	/**
+	 * Permet de récupérer une catégorie dans la base à partir de son nom
+	 * @param em : l'entityManager
+	 * @param nom : le nom de la catégorie
+	 * @retunr la categorie ou null si elle n'existe pas
 	 */
-	public static boolean isExists(EntityManager em, String nom) {
+	public static Categorie getByNom(EntityManager em, String nom) {
 		TypedQuery<Categorie> query = em.createQuery("SELECT c FROM Categorie c WHERE c.nom=:param", Categorie.class);
 		query.setParameter("param", nom);
 		List<Categorie> categorie = query.getResultList();
-		if (categorie == null) {
-			return false;
+		if (categorie.size()>0) {
+			return categorie.get(0);
 		}
-		return true;
+		return null;
 	}
+	
 }

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -30,7 +32,11 @@ public class Allergene {
 	private String nom;
 	
 	/** la liste des produits */
-	@ManyToMany(mappedBy = "allergenes")
+	@ManyToMany
+	@JoinTable(name = "ALLERGENE_PRODUIT",
+		joinColumns = @JoinColumn(name = "ID_ALLERGENE", referencedColumnName = "ID"),
+		inverseJoinColumns = @JoinColumn(name = "ID_PRODUIT", referencedColumnName = "ID")
+	)
 	private Set<Produit> produits;
 	
 	/** Constructeur pour JPA */

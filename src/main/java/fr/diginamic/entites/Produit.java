@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Représente un produit alimentaire avec son identifient, ses données de nutrition 
@@ -31,7 +32,7 @@ public class Produit {
 	private int id;
 	
 	/** le nom du produit */
-	@Column(name = "NOM", length = 100, nullable = false, unique = true)
+	@Column(name = "NOM", length = 100, nullable = false)
 	private String nom;
 	
 	/** les informations nutritionnelles du produit */
