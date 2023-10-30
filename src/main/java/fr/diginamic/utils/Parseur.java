@@ -1,6 +1,8 @@
 package fr.diginamic.utils;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -36,7 +38,57 @@ public class Parseur {
 			}
 		}
 		
-		// Traitement des colonnes ingredients, allergenes et additifs
+		// Traitement de la colonne ingredients
+		String[] ingredients = morceaux[4].split(",");
+		String nouveauMorceau = "";
+		String s = "";
+		if (ingredients.length > 0) {
+			s = ingredients[0];
+			
+			// Supression des caractères spéciaux
+			s = s.replace("_", "");
+			s = s.replace("*", "");
+			s = s.replace("\\", "");
+			s = s.replace(".", "");
+			
+			// Suppresion des pourcentages
+			Pattern pattern = Pattern.compile("\\d+ ?%");
+		    Matcher matcher = pattern.matcher(s);
+		    s = matcher.replaceAll("");
+		    
+		    // Supression des doubles espaces
+			s = s.replace("  ", " ");
+			
+			// Supression des espaces avant ou après le nom de l'ingrédient
+			s = s.strip();
+			
+			nouveauMorceau = s;
+		}
+		for (int i = 1; i<ingredients.length; i++) {
+			
+			s = ingredients[i];
+			
+			// Supression des caractères spéciaux
+			s = s.replace("_", "");
+			s = s.replace("*", "");
+			s = s.replace("\\", "");
+			s = s.replace(".", "");
+			
+			// Suppresion des pourcentages
+			Pattern pattern = Pattern.compile("\\d+ ?%");
+		    Matcher matcher = pattern.matcher(s);
+		    s = matcher.replaceAll("");
+		    
+		    // Supression des doubles espaces
+			s = s.replace("  ", " ");
+			
+			// Supression des espaces avant ou après le nom de l'ingrédient
+			s = s.strip();
+			
+			nouveauMorceau += "," + s;
+		}
+		
+		morceaux[4] = nouveauMorceau;
 		
 		return morceaux;
 	}
