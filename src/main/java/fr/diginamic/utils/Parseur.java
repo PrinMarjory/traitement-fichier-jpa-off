@@ -44,52 +44,57 @@ public class Parseur {
 		String s = "";
 		if (ingredients.length > 0) {
 			s = ingredients[0];
-			
-			// Supression des caractères spéciaux
-			s = s.replace("_", "");
-			s = s.replace("*", "");
-			s = s.replace("\\", "");
-			s = s.replace(".", "");
-			
-			// Suppresion des pourcentages
-			Pattern pattern = Pattern.compile("\\d+ ?%");
-		    Matcher matcher = pattern.matcher(s);
-		    s = matcher.replaceAll("");
-		    
-		    // Supression des doubles espaces
-			s = s.replace("  ", " ");
-			
-			// Supression des espaces avant ou après le nom de l'ingrédient
-			s = s.strip();
-			
+			s = nettoyageString(s);
 			nouveauMorceau = s;
 		}
 		for (int i = 1; i<ingredients.length; i++) {
-			
 			s = ingredients[i];
-			
-			// Supression des caractères spéciaux
-			s = s.replace("_", "");
-			s = s.replace("*", "");
-			s = s.replace("\\", "");
-			s = s.replace(".", "");
-			
-			// Suppresion des pourcentages
-			Pattern pattern = Pattern.compile("\\d+ ?%");
-		    Matcher matcher = pattern.matcher(s);
-		    s = matcher.replaceAll("");
-		    
-		    // Supression des doubles espaces
-			s = s.replace("  ", " ");
-			
-			// Supression des espaces avant ou après le nom de l'ingrédient
-			s = s.strip();
-			
+			s = nettoyageString(s);
 			nouveauMorceau += "," + s;
 		}
-		
 		morceaux[4] = nouveauMorceau;
 		
+		// Traitement de la colonne allergène
+		if (morceaux[28] != null) {
+			String[] allergenes = morceaux[28].split(",");
+			nouveauMorceau = "";
+			s = "";
+			if (allergenes.length > 0) {
+				s = allergenes[0];
+				s = nettoyageString(s);
+				nouveauMorceau = s;
+			}
+			for (int i = 1; i<allergenes.length; i++) {
+				s = allergenes[i];
+				s = nettoyageString(s);
+				nouveauMorceau += "," + s;
+			}
+			morceaux[28] = nouveauMorceau;
+		}
+		
 		return morceaux;
+	}
+	
+	public static String nettoyageString(String s) {
+		
+		// Supression des caractères spéciaux
+		s = s.replace("_", "");
+		s = s.replace("*", "");
+		s = s.replace("\\", "");
+		s = s.replace(".", "");
+		s = s.replace("'", "");
+		
+		// Suppresion des pourcentages
+		Pattern pattern = Pattern.compile("\\d+ ?%");
+	    Matcher matcher = pattern.matcher(s);
+	    s = matcher.replaceAll("");
+	    
+	    // Supression des doubles espaces
+		s = s.replace("  ", " ");
+		
+		// Supression des espaces avant ou après la string
+		s = s.strip();
+		
+		return s;
 	}
 }
