@@ -28,7 +28,7 @@ public class Ingredient {
 	private int id;
 	
 	/** le nom de l'ingrédient */
-	@Column(name = "NOM", length = 150, nullable = false, unique = true)
+	@Column(name = "NOM", length = 500, nullable = false, unique = true)
 	private String nom;
 	
 	/** la liste des produits */

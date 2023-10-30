@@ -29,7 +29,7 @@ public class OpenFoodFactsUtils {
 	 * Lit le contenu du fichier en paramètre contenant des données open food facts, transforme ces données au format attendu
 	 * et remplie la base de donnée mariaDB en accordance
 	 * @param cheminFichier : le chemin d'accès du fichier sur le disque dur
-	 * @param ligneDebut : le numéro de ligne ou commancer à charger le fichier csv
+	 * @param ligneDebut : le numéro de ligne ou commencer à charger le fichier csv
 	 */
 	public static void chargerMariaDB(Path cheminFichier, int ligneDebut) {
 		
@@ -49,10 +49,9 @@ public class OpenFoodFactsUtils {
 			
 			
 			// Traitement des lignes du fichier csv pour ajout dans la base
-			for (int i = ligneDebut; i<(ligneDebut+100); i++) {
+			for (int i = ligneDebut; i<lignes.size(); i++) {
 				transaction.begin();
-				
-				
+		
 				lignePropre = Parseur.TableauColonne(lignes.get(i), i+1);
 				
 				// Ajout de la catégorie si elle n'existe pas encore

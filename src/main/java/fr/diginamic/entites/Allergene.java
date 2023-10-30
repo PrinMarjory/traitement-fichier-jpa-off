@@ -28,7 +28,7 @@ public class Allergene {
 	private int id;
 	
 	/** le nom de l'allergène*/
-	@Column(name = "NOM", length = 50, nullable = false, unique = true)
+	@Column(name = "NOM", length = 500, nullable = false, unique = true)
 	private String nom;
 	
 	/** la liste des produits */

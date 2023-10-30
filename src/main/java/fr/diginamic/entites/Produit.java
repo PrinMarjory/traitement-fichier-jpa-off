@@ -32,7 +32,7 @@ public class Produit {
 	private int id;
 	
 	/** le nom du produit */
-	@Column(name = "NOM", length = 100, nullable = false)
+	@Column(name = "NOM", length = 500, nullable = false)
 	private String nom;
 	
 	/** les informations nutritionnelles du produit */
@@ -87,7 +87,7 @@ public class Produit {
 
 	@Override
 	public String toString() {
-		return "Produit [id=" + id + ", nom=" + nom + ", nutrition=" + nutrition + ", categorie=" + categorie
+		return "Produit [id=" + id + ", nom=" + nom + ", nutriscore=" + nutrition.getNutriscore() + ", categorie=" + categorie
 				+ ", marques=" + marques + ", ingredients=" + ingredients + ", allergenes=" + allergenes + ", additifs="
 				+ additifs + "]";
 	}

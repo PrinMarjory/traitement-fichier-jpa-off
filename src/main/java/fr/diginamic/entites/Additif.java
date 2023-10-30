@@ -28,7 +28,7 @@ public class Additif {
 	private int id;
 	
 	/** le nom de l'additif*/
-	@Column(name = "NOM", length = 100, nullable = false, unique = true)
+	@Column(name = "NOM", length = 500, nullable = false, unique = true)
 	private String nom;
 	
 	/** la liste des produits */

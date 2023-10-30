@@ -26,7 +26,7 @@ public class Categorie {
 	private int id;
 	
 	/** le nom de la catégorie */
-	@Column(name = "NOM", length = 150, nullable = false, unique = true)
+	@Column(name = "NOM", length = 500, nullable = false, unique = true)
 	private String nom;
 	
 	/** la liste des produits */
